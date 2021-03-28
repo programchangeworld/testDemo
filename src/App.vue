@@ -1,32 +1,42 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <tabbar></tabbar>
+    <router-view></router-view>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import tabbar from './components/Tabbar'
+export default {
+  date () {
+    return {
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
     }
+  },
+  components: {
+    tabbar
+  },
+  mounted () {
+    // axios.get('/ajax/movieOnInfoList?token=&optimus_uuid=891732708F9511EB9C721961B822E040D0B6F6C180D6419183F645935CB18C52&optimus_risk_level=71&optimus_code=10').then(res => {
+    //   console.log(res.data)
+    // })
+    // axios.get('https://m.maizuo.com/gateway?cityId=210300&pageNum=1&pageSize=10&type=1&k=4832314').then(res=>{
+    //   console.log(res.data)
+    // })
+    // axios({
+    //   url:'https://m.maizuo.com/gateway?cityId=210300&pageNum=1&pageSize=10&type=1&k=4832314',
+    //   headers:{
+    //     'X-Client-Info':'{"a":"3000","ch":"1002","v":"5.0.4","e":"16168921093001537894809601","bc":"210300"}',
+    //     'X-Host': 'mall.film-ticket.film.list'
+    //   },
+    //   method:'get'
+    // }).then(res=>{console.log(res)})
   }
+}
+</script>
+<style>
+*{
+  margin: 0;
+  padding: 0;
 }
 </style>

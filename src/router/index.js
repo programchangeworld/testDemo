@@ -1,29 +1,69 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Film from '../views/Film'
+import Cinema from '../views/Cinema.vue'
+import Nowplaying from '../views/film/Nowplaying.vue'
+import Comingsoon from '../views/film/Comingsoon.vue'
+import Detail from '../views/Detail.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/film',
+    component: Film,
+    children: [
+      {
+        path: 'Nowplaying',
+        component: Nowplaying
+      },
+      {
+        path: 'Comingsoon',
+        component: Comingsoon
+      },
+      {
+        path: '',
+        redirect: 'Nowplaying'
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/cinema',
+    component: Cinema
+  },
+  {
+    path: '/detail/:myid',
+    component: Detail
+  },
+  {
+    path: '/center',
+    component: () => import('../views/Center.vue')
+  },
+  {
+    path: '/login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '',
+    redirect: '/film'
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) =>{
+//   let auth = ['/center','/order','/money','/card']
+//   if(auth.includes(to.fullPath)){
+//     if(!localStorage.getItem('token')){
+//       next('/login')
+//     }
+//   }
+//   else{
+//     next()
+//   }
+// })
 
 export default router
