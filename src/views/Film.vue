@@ -2,7 +2,9 @@
     <ul>
         <film-swiper></film-swiper>
         <filmHeader style="position:sticky;top:0px;"></filmHeader>
-        <router-view></router-view>
+        <section>
+          <router-view></router-view>
+        </section>
     </ul>
 </template>
 <script>
@@ -15,3 +17,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+*{
+  padding: 0;
+  margin: 0;
+}
+li{
+  list-style: none;
+}
+html,body{
+  height: 100%;
+}
+</style>

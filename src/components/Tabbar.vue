@@ -18,6 +18,7 @@
 </template>
 <style lang="scss" scoped>
     nav{
+        z-index: 1000;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -29,7 +30,6 @@
         ul{
             display: flex;
             list-style: none;
-
             li{
                 flex: 1;
                 span{
