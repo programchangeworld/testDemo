@@ -12,6 +12,7 @@ div{
     height: 60px;
     line-height: 60px;
     background: #fff;
+    box-sizing:border-box;
 }
 ul{
     list-style: none;

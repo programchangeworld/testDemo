@@ -1,7 +1,7 @@
 <template>
     <ul>
         <film-swiper></film-swiper>
-        <filmHeader style="position:sticky;top:0px;"></filmHeader>
+        <filmHeader style="position:sticky;top:0px;z-index:100"></filmHeader>
         <section>
           <router-view></router-view>
         </section>

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="filminfo">
+    <div v-if="filminfo" class="filminfo">
         <detail-head v-top :title="filminfo.name"></detail-head>
         <div :style="{backgroundImage:'url('+filminfo.poster+')'}" style="width:100%;height:200px;background-size:cover;
         backgroun-position:center"></div>
