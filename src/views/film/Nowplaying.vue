@@ -1,15 +1,22 @@
 <template>
     <div>
         <ul style="flex-direction: column;">
-            <li v-for="data in datalist" :key='data.filmId' @click="handleClick(filmId)">
+            <li v-for="data in datalist" :key='data.filmId' @click="handleClick(data.filmId)">
                 <img :src="data.poster" alt="">
                 <h3>{{data.name}}</h3>
+                <p>主演:{{data.actors | actorFilter}}</p>
+                <p>{{data.nation}} | {{data.runtime}}分钟</p>
             </li>
         </ul>
     </div>
 </template>
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+Vue.filter('actorFilter', (actors) => {
+  if (actors === undefined) return '暂无主演'
+  return actors.map(item => item.name).join(' ')
+})
 export default {
   data () {
     return {
@@ -33,7 +40,7 @@ export default {
       method: 'get'
     }).then(res => {
       this.datalist = res.data.data.films
-      console.log(this.datalist)
+      // console.log(this.datalist)
     })
   }
 }
@@ -45,6 +52,11 @@ li{
   img{
     float: left;
     width: 100px;
+  }
+  p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>
