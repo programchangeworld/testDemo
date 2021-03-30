@@ -1,12 +1,13 @@
 <template>
   <div>
-    <tabbar></tabbar>
+    <tabbar v-show="isTabbarShow"></tabbar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import tabbar from './components/Tabbar'
+import { mapState } from 'vuex'
 export default {
   date () {
     return {
@@ -16,7 +17,11 @@ export default {
   components: {
     tabbar
   },
+  computed: {
+    ...mapState('TabbarModule', ['isTabbarShow'])
+  },
   mounted () {
+    // console.log(mapState("TabbarModule"),["isTabbarShow"])
     // axios.get('/ajax/movieOnInfoList?token=&optimus_uuid=891732708F9511EB9C721961B822E040D0B6F6C180D6419183F645935CB18C52&optimus_risk_level=71&optimus_code=10').then(res => {
     //   console.log(res.data)
     // })

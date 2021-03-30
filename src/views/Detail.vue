@@ -28,7 +28,7 @@
         <detail-swiper :perslide="4" swiperclass="swiper-photos">
           <div class="swiper-slide" v-for="(data,index) in filminfo.photos" :key="index">
               <div :style="{backgroundImage:'url('+data+')'}" style="height:70px;background-size:cover;
-              backgroun-position:center"></div>
+              backgroun-position:center" @click="handlPreview(index)"></div>
           </div>
         </detail-swiper>
     </div>
@@ -39,10 +39,11 @@ import Vue from 'vue'
 import moment from 'moment'
 import detailSwiper from './detail/DetailSwiper'
 import detailHead from './detail/DetailHead'
+import { ImagePreview } from 'vant'
+import { mapMutations } from 'vuex'
 Vue.filter('dateFilter', (date) => {
   return moment(date * 1000).format('YYYY-MM-DD')
 })
-
 Vue.directive('top', {
   inserted (el) {
     el.style.display = 'none'
@@ -69,8 +70,22 @@ export default {
     detailSwiper,
     detailHead
   },
+  methods: {
+    ...mapMutations('TabbarModule', ['showTabbar', 'hideTabbar']),
+    handlPreview (index) {
+      ImagePreview({
+        images: this.filminfo.photos,
+        startPosition: index,
+        closeable: true,
+        loop: true,
+        closeIconPosition: 'top-left'
+      })
+    }
+  },
   mounted () {
+    this.hideTabbar()
     // console.log(this.$route.params.myid)
+    this.$store.commit('hideTabbar')
     http({
       url: `/gateway?filmId=${this.$route.params.myid}&k=5201205`,
       headers: {
@@ -81,6 +96,9 @@ export default {
       // console.log(res.data.data.film)
       this.filminfo = res.data.data.film
     })
+  },
+  beforeDestroy () {
+    this.showTabbar()
   }
 }
 </script>
